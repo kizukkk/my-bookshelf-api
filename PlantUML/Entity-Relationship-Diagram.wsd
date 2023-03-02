@@ -1,0 +1,76 @@
+@startuml entity-relationship
+
+hide circle
+
+skinparam linetype ortho
+
+entity "Books" as e01 {
+  id : number         <<generated>>
+  title : text
+  year : integer      <<nullable>>
+  description : text 
+}
+
+entity "Users" as e02 {
+  id : number         <<generated>>
+  email : text        <<unique>>
+  password : text
+}
+
+entity "Authors" as e03 {
+  id : number         <<generated>>
+  name : text
+  name : birthday     <<nullable>>
+  name : country      <<nullable>>
+}
+
+entity "Roles" as e04 {
+  id : number        <<generated>>
+  name : text
+  description : text
+}
+
+entity "Book_List" as e05 {
+  id : number       <<generated>>
+  name : text
+  description : text
+}
+
+entity "Genres" as e06 {
+  id : number        <<generated>>
+  name : text
+  description : text
+}
+
+entity "Roles_Users" as e07 {
+  id : number       <<generated>>
+  user_id : number  <<FR>>
+  role_id : number  <<FR>>
+}
+
+entity "Genres_Books" as e08 {
+  id : number       <<generated>>
+  genre_id : number <<FR>>
+  book_id : number  <<FR>>
+}
+
+entity "Authors_Books" as e09 {
+  id : number       <<generated>>
+  name : number     <<FR>>
+  book_id : number  <<FR>>
+}
+
+ e01 }|--|{ e09
+ e09 }|--|{ e03
+
+ e01 }|--|{ e08
+ e06 }|--|{ e08
+
+ e01 }o--o{ e05
+ e05 ||--|{ e02
+
+ e07 }|--|{ e02
+ e07 }o--|{ e04
+
+
+@enduml
