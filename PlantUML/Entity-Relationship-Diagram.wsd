@@ -20,8 +20,8 @@ entity "Users" as e02 {
 entity "Authors" as e03 {
   id : number         <<generated>>
   name : text
-  name : birthday     <<nullable>>
-  name : country      <<nullable>>
+  birthday : text     <<nullable>>
+  country : text      <<nullable>>
 }
 
 entity "Roles" as e04 {
