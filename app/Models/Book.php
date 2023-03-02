@@ -10,16 +10,38 @@ class Book extends Model
         'title', 
         'year',
         'description',
-        'isbn'
     ];
 
     public function genres()
     {
-        return $this->belongsToMany(Genre::class, 'book_genre');
+        return $this->belongsToMany
+        (
+            Genre::class, 
+            'genres_books',
+            'book_id',
+            'genre_id'
+        );
     }
 
     public function authors()
     {
-        return $this->belongsToMany(Author::class, 'book_author');
+        return $this->belongsToMany
+        (
+            Author::class, 
+            'authors_books',
+            'book_id',
+            'author_id'
+        );
+    }
+
+    public function users_who_added_to_list()
+    {
+        return $this->belongsToMany
+        (
+            User::class, 
+            'book_list',
+            'book_id',
+            'user_id'
+        );
     }
 }
